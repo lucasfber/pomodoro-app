@@ -1,0 +1,23 @@
+ao pausar e começar de novo, o pomodoro decrementa o 
+tempo de forma errada, mais rapido que antes
+    SOLUÇÃO: O CLICK PLAY/PAUSE na verdade criava outro pomodoro
+
+
+BUG#02 - O usuario pode apertar start, sem ter digitado o tempo do pomodoro
+BUG#03 - O botao Pause não está habilitado quando o pomodoro começa
+
+Ao clicar em start, o botão fica desabilitado
+Ao clicar em Parar, o botão volta ao estado de antes
+
+O usuario sera capaz de: 
+    Iniciar o Pomodoro, 
+    Pausar, 
+    Reset
+
+Ao clicar em Reset: 
+    Pomodoro para
+    Input fica habilitado
+    Header de pomodoro mostra o que tem no input
+
+
+
