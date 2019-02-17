@@ -21,3 +21,11 @@ Ao clicar em Reset:
 
 
 
+Melhorias: 
+    Adicionar funcionalide de Break 
+
+    Dois inputs na UI: 
+        Pomodoro Timer | Break Timer
+
+        Mostra um TImer por vez: 
+            Quando Pomodoro está rolando, timer do break some e vice-versa

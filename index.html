@@ -1,131 +1,24 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
   <body>
-    <audio id="myAudio"></audio>
-    <input
-      id="inputPomodoro"
-      type="number"
-      min="1"
-      max="6000"
-      placeholder="10"
-    /><br />
-    <button id="btnStart">Start</button>
-    <button id="btnStop">Pause</button>
-    <button id="btnReset">Reset</button>
-    <h1 id="pomodoro"></h1>
-    <p>o que ta faltando:</p>
-    <p>Quando pomodoro tiver pra começar: botao exibe Play/start</p>
-    <p>Quando tiver rolando exibe Pause</p>
-    <script>
-      const SECOND = 1000; //1 second equals 1000ms
-      const MINUTE = 1000 * 60; /// (SECOND * 60)
-
-      let btnStart, btnStop, btnReset, audio, pomodoroHeading, x, pomodoro;
-
-      getComponents();
-
-      pomodoro = 0;
-
-      setComponents();
-
-      function toggleButton(button) {
-        button.disabled = !button.disabled;
-      }
-
-      function initPomodoro() {
-        toggleButton(btnStart);
-        toggleButton(btnStop);
-        inputPomodoro.disabled = true;
-        console.log("AO ENTRAR NO INIT", pomodoro);
-        x = setInterval(() => {
-          pomodoroHeading.innerHTML = `${formatPomodoroMinutes(
-            convertTime(pomodoro, "m")
-          )}:${formatPomodoroSeconds(convertTime(pomodoro, "s"))}`;
-
-          pomodoro -= 1000;
-          if (pomodoro < 0) {
-            clearInterval(x);
-            audio.play();
-            document.title = "Buzzzz!";
-            pomodoro = 0;
-          }
-        }, 1000);
-      }
-
-      function reset() {
-        inputPomodoro.disabled = false;
-        pomodoroTime = parseInt(inputPomodoro.value);
-        pomodoro = MINUTE * pomodoroTime;
-      }
-
-      function formatPomodoroMinutes(minutes) {
-        return minutes < 1 ? `0${minutes}` : `${minutes}`;
-      }
-
-      function convertTime(time, unit) {
-        const SECOND = 1000; //1 second equals 1000ms
-        const MINUTE = 1000 * 60; /// (SECOND * 60)
-
-        if (unit === "m") {
-          return Math.floor(time / MINUTE);
-        } else if (unit === "s") {
-          return Math.floor((time % MINUTE) / SECOND);
-        }
-      }
-
-      function formatPomodoroSeconds(seconds) {
-        return seconds < 10 ? `0${seconds}` : `${seconds}`;
-      }
-
-      function resetPomodoro(time) {
-        pomodoro = time;
-      }
-
-      function stopPomodoro() {
-        console.log(pomodoro + SECOND);
-        /* remainingTime = pomodoro + SECOND; */
-        document.querySelector(
-          "#pomodoro"
-        ).innerHTML = `${formatPomodoroMinutes(
-          convertTime(pomodoro + 1000, "m")
-        )}:${formatPomodoroSeconds(convertTime(pomodoro + 1000, "s"))}`;
-        clearInterval(x);
-      }
-
-      btnStart.addEventListener("click", () => {
-        initPomodoro();
-      });
-      btnStop.addEventListener("click", () => {
-        btnStart.disabled = false;
-        btnStop.disabled = true;
-        stopPomodoro();
-      });
-
-      btnReset.addEventListener("click", () => {
-        reset();
-      });
-      function getComponents() {
-        btnStart = document.getElementById("btnStart");
-        btnStop = document.getElementById("btnStop");
-        btnReset = document.getElementById("btnReset");
-        audio = document.getElementById("myAudio");
-        pomodoroHeading = document.getElementById("pomodoro");
-      }
-
-      function setComponents() {
-        let inputPomodoro = document.getElementById("inputPomodoro");
-        window.addEventListener("focus", () => {
-          audio.pause();
-        });
-
-        audio.src = "./alarm.mp3";
-
-        inputPomodoro.addEventListener("change", e => {
-          pomodoroTime = parseInt(e.target.value);
-          pomodoro = MINUTE * pomodoroTime;
-          console.log(pomodoro);
-        });
-      }
-    </script>
+    <div class="container">
+      <h3 class="text-primary">Choose your Pomodoro Time:</h3>
+      <input
+        id="inputPomodoro"
+        type="number"
+        min="1"
+        default="1"
+        max="6000"
+        placeholder="Ex: 20"
+      />
+      <button id="btnStart" class="btn btn-md btn-start">Start</button>
+      <button id="btnPause" class="btn btn-md btn-pause">Pause</button>
+      <button id="btnReset" class="btn btn-md btn-reset">Reset</button>
+      <h1 id="pomodoroTimer"></h1>
+    </div>
+    <script src="./app.js"></script>
   </body>
 </html>
